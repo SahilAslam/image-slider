@@ -1,5 +1,21 @@
 import ImageSlider from "./ImageSlider";
 
+const containerStyles = {
+  width: "500px",
+  height: "280px",
+  margin: "0 auto",
+};
+
+const headlindeStyles = {
+  textAlign: "center",
+  padding: "20px 0 5px 0",
+};
+
+const paragraphStyles = {
+  textAlign: "center",
+  padding: "0 0 20px 0",
+};
+
 function App() {
   const slides = [
     { image: "/image-1.jpg", title: "beach" },
@@ -9,14 +25,12 @@ function App() {
     { image: "/image-5.jpg", title: "italy" },
   ];
 
-  const containerStyles = {
-    width: "500px",
-    height: "280px",
-    margin: "0 auto",
-  }
-
   return (
     <div>
+      <h1 style={headlindeStyles}>Image Slider</h1>
+      <p style={paragraphStyles}>
+        This is a simple application that I build to practiced image sliding
+      </p>
       <div style={containerStyles}>
         <ImageSlider slides={slides} />
       </div>
@@ -24,4 +38,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
