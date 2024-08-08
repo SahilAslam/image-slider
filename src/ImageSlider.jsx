@@ -35,22 +35,47 @@ const leftArrowStyles = {
   cursor: "pointer",
 };
 
+const dotContainerStyles = {
+  display: "flex",
+  flexPosition: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: "10px"
+}
+
+const dotStyles = {
+  cursor: "pointer",
+  fontSize: "20px"
+}
+
+const currentDotStyles = {
+  color: "orange",
+  cursor: "pointer",
+  
+}
 
 const ImageSlider = ({ slides = [{}] }) => {
-  
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [index, setIndex] = useState(0)
 
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
+    setIndex(newIndex)
     setCurrentIndex(newIndex);
   };
 
   const goToNext = () => {
     const isLastIndex = currentIndex === slides.length - 1;
     const newIndex = isLastIndex ? 0 : currentIndex + 1;
+    setIndex(newIndex)
     setCurrentIndex(newIndex);
   };
+
+  const goToSlide = (index) => {
+    setIndex(index)
+    setCurrentIndex(index)
+  }
 
   return (
     <div style={sliderStyle}>
@@ -62,7 +87,14 @@ const ImageSlider = ({ slides = [{}] }) => {
           ❱
         </div>
       </div>
-      <img src={slides[currentIndex].image} style={slideStyle} alt="" />
+      <img src={slides[currentIndex].image} style={slideStyle} />
+      <div style={dotContainerStyles}>
+        {slides.map((slide, slideIndex) => (
+          <div style={slideIndex === index ? currentDotStyles : dotStyles} key={slideIndex} onClick={() => goToSlide(slideIndex)}>
+            ●
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
